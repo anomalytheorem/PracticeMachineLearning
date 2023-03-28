@@ -5,10 +5,7 @@
   },
   "waitFor": "onCreateCommand",
   "updateContentCommand": "python3 -m pip install -r requirements.txt",
-  "postCreateCommand": "pip install catboost",
-  "postCreateCommand": "pip install xgboost",
-  "postCreateCommand": "pip install lightgbm",
-  "postCreateCommand": "pip install mlxtend",
+  "postCreateCommand": "",
   "customizations": {
     "codespaces": {
       "openFiles": []
