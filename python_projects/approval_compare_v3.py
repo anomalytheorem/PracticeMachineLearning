@@ -97,10 +97,9 @@ e1["invoiceid"] = e1['Vendor'].astype(str) +" "+ e1['Invoice'].astype(str)
 
 # Should prep the spreadsheet to avoid this issue. Will comment out later.
 e1 = e1.rename(columns={'Unnamed: 7': 'Due Date'})
-e1.head()
 
 # merging dataframes
-e3 = e1[["invoiceid","Due Date"]].merge(e2[["invoiceid","Status"]],on="invoiceid",how="left")
+e3 = e1[["invoiceid","Due Date","Company"]].merge(e2[["invoiceid","Status","Sent to"]],on="invoiceid",how="left")
 
 # replace NaN with "Not Uploaded" since NaN means it was missing from the approval spreadsheet.
 e3[['Status']] = e3[['Status']].fillna('Not Uploaded')
