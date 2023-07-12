@@ -8,6 +8,7 @@ Created on Sun Jul  9 21:15:36 2023
 # import pandas, tkinter, subprocess, sys, and fieldialog
 
 import pandas as pd
+import numpy as np
 import subprocess
 import sys
 import tkinter as tk
@@ -71,6 +72,18 @@ e3_path = file_selector.output_path
 # reading files
 e1 = pd.read_excel(e1_path)
 e2 = pd.read_excel(e2_path)
+
+#replace all int values in the Vendor column with Nan
+e1['Vendor'] = e1['Vendor'].mask(e1['Vendor'].apply(lambda x: isinstance(x, int)), np.nan)
+
+#copy the vendor code to each empty cell in row 'Vendor' if it is empty 
+#with the cell above
+for i in range(2, len(e1)):
+    if pd.isnull(e1.at[i, 'Vendor']):
+        e1.at[i, 'Vendor'] = e1.at[i-1, 'Vendor']
+
+# Drop rows based on missing the 'O' value. Invoices only show in 'O' rows
+e1 = e1[e1['S'] == 'O']
 
 # rename e2 title column and drop first 15 characters
 e2 = e2.rename(columns={'Title': 'invoiceid'})
