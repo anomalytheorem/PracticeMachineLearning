@@ -93,7 +93,7 @@ e2 = e2.rename(columns={'Title': 'invoiceid'})
 e2['invoiceid'] = e2['invoiceid'].str[15:]
 
 # for e1 merge vendor and invoice to invoiceid
-e1["invoiceid"] = e1['Vendor'].astype(str) +" "+ e1['Invoice']
+e1["invoiceid"] = e1['Vendor'].astype(str) +" "+ e1['Invoice'].astype(str)
 
 # Should prep the spreadsheet to avoid this issue. Will comment out later.
 e1 = e1.rename(columns={'Unnamed: 7': 'Due Date'})
