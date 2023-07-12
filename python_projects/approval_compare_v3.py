@@ -76,6 +76,9 @@ e2 = pd.read_excel(e2_path)
 #replace all int values in the Vendor column with Nan
 e1['Vendor'] = e1['Vendor'].mask(e1['Vendor'].apply(lambda x: isinstance(x, int)), np.nan)
 
+# Drop rows that has 'S' or 'T' oin the 'S' column
+e1 = e1[~e1['S'].isin(['S', 'T'])]
+
 #copy the vendor code to each empty cell in row 'Vendor' if it is empty 
 #with the cell above
 for i in range(2, len(e1)):
